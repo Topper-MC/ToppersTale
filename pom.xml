@@ -4,15 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>dev.hytalemodding</groupId>
-    <artifactId>ExamplePlugin</artifactId>
+    <groupId>me.hsgamer</groupId>
+    <artifactId>ToppersTale</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <hytale.version>2026.01.22-6f8bdbdc4</hytale.version>
         <java.version>25</java.version>
 
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <core.version>4.7.6</core.version>
+        <topper.version>4.14.0</topper.version>
     </properties>
 
     <build>
@@ -24,6 +25,7 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -54,7 +56,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <main>dev.hytalemodding.ExamplePlugin</main>
+                    <main>me.hsgamer.topperstale.ToppersTale</main>
+                    <group>HSGamer</group>
                 </configuration>
             </plugin>
         </plugins>
@@ -79,6 +82,49 @@
             <artifactId>Server</artifactId>
             <version>${hytale.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>me.hsgamer</groupId>
+            <artifactId>topper-template-top-player-number</artifactId>
+            <version>${topper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.hsgamer</groupId>
+            <artifactId>topper-storage-flat-properties</artifactId>
+            <version>${topper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.hsgamer</groupId>
+            <artifactId>topper-storage-flat-configfile</artifactId>
+            <version>${topper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.hsgamer</groupId>
+            <artifactId>topper-storage-flat-converter</artifactId>
+            <version>${topper.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>me.hsgamer</groupId>
+            <artifactId>hscore-common</artifactId>
+            <version>${core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.hsgamer</groupId>
+            <artifactId>hscore-config-proxy</artifactId>
+            <version>${core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.hsgamer</groupId>
+            <artifactId>hscore-config-gson</artifactId>
+            <version>${core.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>
