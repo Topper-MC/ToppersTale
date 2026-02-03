@@ -22,8 +22,8 @@ public class ToppersTale extends JavaPlugin {
     public ToppersTale(@Nonnull JavaPluginInit init) {
         super(init);
         this.mainConfig = ConfigGenerator.newInstance(MainConfig.class, new GsonConfig(getDataDirectory().resolve("config.json").toFile(), new GsonBuilder().setPrettyPrinting().create()));
+        this.taskManager = new TaskManager(this);
         this.topTemplate = new HyTopTemplate(this);
-        this.taskManager = new TaskManager();
     }
 
     @Override

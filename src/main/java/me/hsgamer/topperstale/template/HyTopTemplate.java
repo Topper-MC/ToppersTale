@@ -16,10 +16,7 @@ import me.hsgamer.topperstale.ToppersTale;
 
 import javax.annotation.Nullable;
 import java.io.File;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Function;
 import java.util.logging.Level;
 
@@ -62,18 +59,20 @@ public class HyTopTemplate extends TopPlayerNumberTemplate {
         var keyConverter = new UUIDFlatValueConverter();
         var valueConverter = new NumberFlatValueConverter<>(number -> number != null ? number.doubleValue() : 0);
         return switch (plugin.getMainConfig().getStorageType().toLowerCase(Locale.ROOT)) {
-            case "json" -> name -> new ConfigFileDataStorage<>(plugin.getDataDirectory().toFile(), name, keyConverter, valueConverter) {
-                @Override
-                protected Config getConfig(File file) {
-                    return new GsonConfig(file);
-                }
+            case "json" ->
+                    name -> new ConfigFileDataStorage<>(plugin.getDataDirectory().toFile(), name, keyConverter, valueConverter) {
+                        @Override
+                        protected Config getConfig(File file) {
+                            return new GsonConfig(file);
+                        }
 
-                @Override
-                protected String getConfigName(String s) {
-                    return name + ".json";
-                }
-            };
-            default -> name -> new PropertiesDataStorage<>(plugin.getDataDirectory().toFile(), name, keyConverter, valueConverter);
+                        @Override
+                        protected String getConfigName(String s) {
+                            return name + ".json";
+                        }
+                    };
+            default ->
+                    name -> new PropertiesDataStorage<>(plugin.getDataDirectory().toFile(), name, keyConverter, valueConverter);
         };
     }
 
@@ -86,16 +85,20 @@ public class HyTopTemplate extends TopPlayerNumberTemplate {
     public Agent createTask(Runnable runnable, NumberTopHolder.TaskType taskType, Map<String, Object> settings) {
         switch (taskType) {
             case STORAGE -> {
-                return plugin.getTaskManager().createTaskAgent(runnable, plugin.getMainConfig().getTaskSaveDelay());
+                return plugin.getTaskManager().createTaskAgent(runnable, plugin.getMainConfig().getTaskSaveDelay(), true);
             }
             case SET -> {
-                return plugin.getTaskManager().createTaskAgent(runnable, plugin.getMainConfig().getTaskUpdateSetDelay());
+                return plugin.getTaskManager().createTaskAgent(runnable, plugin.getMainConfig().getTaskUpdateSetDelay(), true);
             }
             case UPDATE -> {
-                return plugin.getTaskManager().createTaskAgent(runnable, plugin.getMainConfig().getTaskUpdateDelay());
+                boolean async = Optional.ofNullable(settings.get("async"))
+                        .map(Objects::toString)
+                        .map(Boolean::parseBoolean)
+                        .orElse(false);
+                return plugin.getTaskManager().createTaskAgent(runnable, plugin.getMainConfig().getTaskUpdateDelay(), async);
             }
             default -> {
-                return plugin.getTaskManager().createTaskAgent(runnable, 1000);
+                return plugin.getTaskManager().createTaskAgent(runnable, 1000, true);
             }
         }
     }
