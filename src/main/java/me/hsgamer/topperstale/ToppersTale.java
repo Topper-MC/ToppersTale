@@ -1,14 +1,15 @@
 package me.hsgamer.topperstale;
 
 import com.google.gson.GsonBuilder;
+import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.hsgamer.hscore.config.gson.GsonConfig;
 import me.hsgamer.hscore.config.proxy.ConfigGenerator;
-import me.hsgamer.topperstale.commands.ExampleCommand;
 import me.hsgamer.topperstale.config.MainConfig;
-import me.hsgamer.topperstale.events.ExampleEvent;
 import me.hsgamer.topperstale.manager.TaskManager;
 import me.hsgamer.topperstale.template.HyTopTemplate;
 
@@ -29,8 +30,10 @@ public class ToppersTale extends JavaPlugin {
     @Override
     protected void setup() {
         topTemplate.enable();
-        this.getCommandRegistry().registerCommand(new ExampleCommand("example", "An example command"));
-        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
+        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, event -> {
+            Ref<EntityStore> playerRef = event.getPlayerRef();
+            topTemplate.getTopManager().create(playerRef.getStore().ensureAndGetComponent(playerRef, UUIDComponent.getComponentType()).getUuid());
+        });
     }
 
     @Override
