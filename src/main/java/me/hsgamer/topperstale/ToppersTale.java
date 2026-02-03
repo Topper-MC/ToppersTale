@@ -12,6 +12,7 @@ import me.hsgamer.hscore.config.proxy.ConfigGenerator;
 import me.hsgamer.topperstale.commands.ExampleCommand;
 import me.hsgamer.topperstale.config.MainConfig;
 import me.hsgamer.topperstale.manager.TaskManager;
+import me.hsgamer.topperstale.manager.ValueProviderManager;
 import me.hsgamer.topperstale.template.HyTopTemplate;
 
 import javax.annotation.Nonnull;
@@ -20,11 +21,13 @@ public class ToppersTale extends JavaPlugin {
     private final MainConfig mainConfig;
     private final HyTopTemplate topTemplate;
     private final TaskManager taskManager;
+    private final ValueProviderManager valueProviderManager;
 
     public ToppersTale(@Nonnull JavaPluginInit init) {
         super(init);
         this.mainConfig = ConfigGenerator.newInstance(MainConfig.class, new GsonConfig(getDataDirectory().resolve("config.json").toFile(), new GsonBuilder().setPrettyPrinting().create()));
         this.taskManager = new TaskManager(this);
+        this.valueProviderManager = new ValueProviderManager(this);
         this.topTemplate = new HyTopTemplate(this);
     }
 
@@ -54,5 +57,9 @@ public class ToppersTale extends JavaPlugin {
 
     public TaskManager getTaskManager() {
         return taskManager;
+    }
+
+    public ValueProviderManager getValueProviderManager() {
+        return valueProviderManager;
     }
 }

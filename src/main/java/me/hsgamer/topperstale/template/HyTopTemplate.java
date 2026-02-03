@@ -78,7 +78,7 @@ public class HyTopTemplate extends TopPlayerNumberTemplate {
 
     @Override
     public Optional<ValueProvider<UUID, Double>> createValueProvider(Map<String, Object> settings) {
-        return Optional.empty(); // TODO
+        return plugin.getValueProviderManager().build(settings);
     }
 
     @Override
