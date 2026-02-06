@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class StatisticValueProvider implements ValueProvider<UUID, Double> {
     private final String statistic;
@@ -23,8 +24,7 @@ public class StatisticValueProvider implements ValueProvider<UUID, Double> {
                 .orElse(null);
     }
 
-    @Override
-    public @Nonnull ValueWrapper<Double> apply(@Nonnull UUID uuid) {
+    private @Nonnull ValueWrapper<Double> apply(@Nonnull UUID uuid) {
         if (statistic == null) return ValueWrapper.notHandled();
         return Optional.ofNullable(Universe.get().getPlayer(uuid))
                 .map(PlayerRef::getHolder)
@@ -34,5 +34,10 @@ public class StatisticValueProvider implements ValueProvider<UUID, Double> {
                 .map(Float::doubleValue)
                 .map(ValueWrapper::handled)
                 .orElseGet(() -> ValueWrapper.handled(null));
+    }
+
+    @Override
+    public void accept(UUID uuid, Consumer<ValueWrapper<Double>> callback) {
+        callback.accept(apply(uuid));
     }
 }
