@@ -47,7 +47,7 @@
             <plugin>
                 <groupId>io.github.projectunified</groupId>
                 <artifactId>hytale-manifest-maven-plugin</artifactId>
-                <version>1.1.0</version>
+                <version>1.1.2</version>
                 <executions>
                     <execution>
                         <goals>
@@ -58,21 +58,29 @@
                 <configuration>
                     <main>me.hsgamer.topperstale.ToppersTale</main>
                     <group>HSGamer</group>
+                    <optionalDependencies>
+                        <optionalDependency>
+                            <name>HelpChat:PlaceholderAPI</name>
+                            <version>>= 1.0.2</version>
+                        </optionalDependency>
+                    </optionalDependencies>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
     <repositories>
-        <!-- Hytale release repository -->
         <repository>
             <id>hytale-release</id>
             <url>https://maven.hytale.com/release</url>
         </repository>
-        <!-- Hytale pre-release repository -->
         <repository>
             <id>hytale-pre-release</id>
             <url>https://maven.hytale.com/pre-release</url>
+        </repository>
+        <repository>
+            <id>placeholderapi</id>
+            <url>https://repo.helpch.at/releases/</url>
         </repository>
     </repositories>
 
@@ -130,6 +138,13 @@
                     <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>at.helpch</groupId>
+            <artifactId>placeholderapi-hytale</artifactId>
+            <version>1.0.4</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
