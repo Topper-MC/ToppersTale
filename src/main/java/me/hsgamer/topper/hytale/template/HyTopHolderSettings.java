@@ -1,4 +1,4 @@
-package me.hsgamer.topperstale.template;
+package me.hsgamer.topper.hytale.template;
 
 import com.hypixel.hytale.server.core.permissions.PermissionsModule;
 import me.hsgamer.hscore.common.CollectionUtils;

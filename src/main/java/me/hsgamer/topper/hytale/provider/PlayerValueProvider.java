@@ -1,4 +1,4 @@
-package me.hsgamer.topperstale.provider;
+package me.hsgamer.topper.hytale.provider;
 
 import com.hypixel.hytale.builtin.adventure.memories.component.PlayerMemories;
 import com.hypixel.hytale.component.Holder;

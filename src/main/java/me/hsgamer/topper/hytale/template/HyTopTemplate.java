@@ -1,4 +1,4 @@
-package me.hsgamer.topperstale.template;
+package me.hsgamer.topper.hytale.template;
 
 import me.hsgamer.hscore.config.Config;
 import me.hsgamer.hscore.config.gson.GsonConfig;
@@ -12,7 +12,7 @@ import me.hsgamer.topper.template.topplayernumber.TopPlayerNumberTemplate;
 import me.hsgamer.topper.template.topplayernumber.holder.NumberTopHolder;
 import me.hsgamer.topper.template.topplayernumber.manager.ReloadManager;
 import me.hsgamer.topper.value.core.ValueProvider;
-import me.hsgamer.topperstale.ToppersTale;
+import me.hsgamer.topper.hytale.TopperPlugin;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -21,9 +21,9 @@ import java.util.function.Function;
 import java.util.logging.Level;
 
 public class HyTopTemplate extends TopPlayerNumberTemplate {
-    private final ToppersTale plugin;
+    private final TopperPlugin plugin;
 
-    public HyTopTemplate(ToppersTale plugin) {
+    public HyTopTemplate(TopperPlugin plugin) {
         super(new Settings() {
             @Override
             public Map<String, NumberTopHolder.Settings> holders() {

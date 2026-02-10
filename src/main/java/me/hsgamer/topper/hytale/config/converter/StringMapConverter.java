@@ -1,4 +1,4 @@
-package me.hsgamer.topperstale.config.converter;
+package me.hsgamer.topper.hytale.config.converter;
 
 import me.hsgamer.hscore.config.annotation.converter.Converter;
 

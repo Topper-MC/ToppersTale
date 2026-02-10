@@ -1,4 +1,4 @@
-package me.hsgamer.topperstale.provider;
+package me.hsgamer.topper.hytale.provider;
 
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatMap;
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatValue;

@@ -1,4 +1,4 @@
-package me.hsgamer.topperstale.commands;
+package me.hsgamer.topper.hytale.commands;
 
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.AbstractCommand;

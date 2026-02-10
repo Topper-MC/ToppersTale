@@ -5,8 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.hsgamer</groupId>
-    <artifactId>ToppersTale</artifactId>
+    <artifactId>topper-hytale</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <name>Topper</name>
+    <description>A leaderboard plugin for Hytale</description>
+
+    <developers>
+        <developer>
+            <name>HSGamer</name>
+            <url>https://hsgamer.me</url>
+            <email>huynhqtienvtag@gmail.com</email>
+        </developer>
+    </developers>
 
     <properties>
         <hytale.version>2026.01.22-6f8bdbdc4</hytale.version>
@@ -21,7 +32,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.14.1</version>
+                <version>3.15.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -34,6 +45,21 @@
                 <version>3.6.1</version>
                 <configuration>
                     <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <minimizeJar>true</minimizeJar>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <relocations>
+                        <relocation>
+                            <pattern>me.hsgamer.hscore</pattern>
+                            <shadedPattern>me.hsgamer.topper.hytale.lib.core</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>me.hsgamer.topper</pattern>
+                            <shadedPattern>me.hsgamer.topper.hytale.lib.topper</shadedPattern>
+                            <excludes>
+                                <exclude>me.hsgamer.topper.hytale.**</exclude>
+                            </excludes>
+                        </relocation>
+                    </relocations>
                 </configuration>
                 <executions>
                     <execution>
@@ -43,6 +69,23 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.vafer</groupId>
+                        <artifactId>jdependency</artifactId>
+                        <version>2.14</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.ow2.asm</groupId>
+                        <artifactId>asm</artifactId>
+                        <version>9.9.1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.ow2.asm</groupId>
+                        <artifactId>asm-commons</artifactId>
+                        <version>9.9.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>io.github.projectunified</groupId>
@@ -56,7 +99,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <main>me.hsgamer.topperstale.ToppersTale</main>
+                    <main>me.hsgamer.topper.hytale.TopperPlugin</main>
                     <group>HSGamer</group>
                     <optionalDependencies>
                         <optionalDependency>

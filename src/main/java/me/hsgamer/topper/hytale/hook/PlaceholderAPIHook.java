@@ -1,4 +1,4 @@
-package me.hsgamer.topperstale.hook;
+package me.hsgamer.topper.hytale.hook;
 
 import at.helpch.placeholderapi.PlaceholderAPI;
 import at.helpch.placeholderapi.expansion.PlaceholderExpansion;
@@ -13,8 +13,8 @@ import me.hsgamer.topper.query.forward.QueryForwardContext;
 import me.hsgamer.topper.value.core.ValueProvider;
 import me.hsgamer.topper.value.core.ValueWrapper;
 import me.hsgamer.topper.value.string.StringDeformatters;
-import me.hsgamer.topperstale.ToppersTale;
-import me.hsgamer.topperstale.manager.HookManager.Hook;
+import me.hsgamer.topper.hytale.TopperPlugin;
+import me.hsgamer.topper.hytale.manager.HookManager.Hook;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,10 +26,10 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class PlaceholderAPIHook implements Hook {
-    private final ToppersTale plugin;
+    private final TopperPlugin plugin;
     private final PlaceholderQueryForwarder queryForwarder;
 
-    public PlaceholderAPIHook(ToppersTale plugin) {
+    public PlaceholderAPIHook(TopperPlugin plugin) {
         this.plugin = plugin;
         this.queryForwarder = new PlaceholderQueryForwarder(plugin);
     }

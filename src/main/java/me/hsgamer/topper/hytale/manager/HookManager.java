@@ -1,10 +1,10 @@
-package me.hsgamer.topperstale.manager;
+package me.hsgamer.topper.hytale.manager;
 
 import com.hypixel.hytale.common.plugin.PluginIdentifier;
 import com.hypixel.hytale.common.semver.SemverRange;
 import com.hypixel.hytale.server.core.HytaleServer;
-import me.hsgamer.topperstale.ToppersTale;
-import me.hsgamer.topperstale.hook.PlaceholderAPIHook;
+import me.hsgamer.topper.hytale.TopperPlugin;
+import me.hsgamer.topper.hytale.hook.PlaceholderAPIHook;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class HookManager {
     private final Map<PluginIdentifier, Supplier<Hook>> hookMap = new HashMap<>();
     private final List<Hook> hooks = new ArrayList<>();
 
-    public HookManager(ToppersTale plugin) {
+    public HookManager(TopperPlugin plugin) {
         hookMap.put(new PluginIdentifier("HelpChat", "PlaceholderAPI"), () -> new PlaceholderAPIHook(plugin));
     }
 

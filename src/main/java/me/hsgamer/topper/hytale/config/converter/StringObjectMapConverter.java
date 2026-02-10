@@ -1,4 +1,4 @@
-package me.hsgamer.topperstale.config.converter;
+package me.hsgamer.topper.hytale.config.converter;
 
 public class StringObjectMapConverter extends StringMapConverter<Object> {
     @Override

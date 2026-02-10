@@ -1,9 +1,9 @@
-package me.hsgamer.topperstale.manager;
+package me.hsgamer.topper.hytale.manager;
 
 import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.task.TaskRegistration;
 import me.hsgamer.topper.agent.core.Agent;
-import me.hsgamer.topperstale.ToppersTale;
+import me.hsgamer.topper.hytale.TopperPlugin;
 
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -11,9 +11,9 @@ import java.util.concurrent.TimeUnit;
 
 public class TaskManager {
     private final ScheduledThreadPoolExecutor scheduler = new ScheduledThreadPoolExecutor(1);
-    private final ToppersTale plugin;
+    private final TopperPlugin plugin;
 
-    public TaskManager(ToppersTale plugin) {
+    public TaskManager(TopperPlugin plugin) {
         this.plugin = plugin;
     }
 

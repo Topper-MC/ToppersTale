@@ -1,10 +1,10 @@
-package me.hsgamer.topperstale.config;
+package me.hsgamer.topper.hytale.config;
 
 import me.hsgamer.hscore.config.Config;
 import me.hsgamer.hscore.config.annotation.Comment;
 import me.hsgamer.hscore.config.annotation.ConfigPath;
 import me.hsgamer.topper.template.topplayernumber.holder.NumberTopHolder;
-import me.hsgamer.topperstale.config.converter.HolderMapConverter;
+import me.hsgamer.topper.hytale.config.converter.HolderMapConverter;
 
 import java.util.Collections;
 import java.util.Map;
