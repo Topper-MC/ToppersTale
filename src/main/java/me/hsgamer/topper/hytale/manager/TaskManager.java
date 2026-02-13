@@ -1,9 +1,7 @@
 package me.hsgamer.topper.hytale.manager;
 
 import com.hypixel.hytale.server.core.HytaleServer;
-import com.hypixel.hytale.server.core.task.TaskRegistration;
 import me.hsgamer.topper.agent.core.Agent;
-import me.hsgamer.topper.hytale.TopperPlugin;
 
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -11,30 +9,21 @@ import java.util.concurrent.TimeUnit;
 
 public class TaskManager {
     private final ScheduledThreadPoolExecutor scheduler = new ScheduledThreadPoolExecutor(1);
-    private final TopperPlugin plugin;
-
-    public TaskManager(TopperPlugin plugin) {
-        this.plugin = plugin;
-    }
 
     public Agent createTaskAgent(Runnable runnable, long delayMillis, boolean async) {
         long finalDelayMillis = delayMillis <= 0 ? 1000 : delayMillis;
         return new Agent() {
-            private TaskRegistration taskRegistration;
+            private ScheduledFuture<?> scheduledFuture;
 
             @Override
             public void start() {
-                ScheduledFuture<Void> scheduledFuture = (async ? scheduler : HytaleServer.SCHEDULED_EXECUTOR).schedule(() -> {
-                    runnable.run();
-                    return null;
-                }, finalDelayMillis, TimeUnit.MILLISECONDS);
-                taskRegistration = plugin.getTaskRegistry().registerTask(scheduledFuture);
+                scheduledFuture = (async ? scheduler : HytaleServer.SCHEDULED_EXECUTOR).scheduleAtFixedRate(runnable, finalDelayMillis, finalDelayMillis, TimeUnit.MILLISECONDS);
             }
 
             @Override
             public void stop() {
-                if (taskRegistration != null) {
-                    taskRegistration.unregister();
+                if (scheduledFuture != null) {
+                    scheduledFuture.cancel(true);
                 }
             }
         };
