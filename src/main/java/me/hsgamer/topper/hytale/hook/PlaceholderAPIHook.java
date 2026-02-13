@@ -3,12 +3,9 @@ package me.hsgamer.topper.hytale.hook;
 import at.helpch.placeholderapi.PlaceholderAPI;
 import at.helpch.placeholderapi.expansion.PlaceholderExpansion;
 import com.hypixel.hytale.common.plugin.AuthorInfo;
-import com.hypixel.hytale.component.Holder;
-import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.plugin.PluginBase;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
-import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.hsgamer.topper.hytale.TopperPlugin;
 import me.hsgamer.topper.hytale.manager.HookManager.Hook;
 import me.hsgamer.topper.query.forward.QueryForwardContext;
@@ -90,13 +87,7 @@ public class PlaceholderAPIHook implements Hook {
             PlaceholderExpansion expansion = new PlaceholderExpansion() {
                 @Override
                 public @Nullable String onPlaceholderRequest(PlayerRef playerRef, @NotNull String params) {
-                    UUID uuid = null;
-                    if (playerRef != null && playerRef.isValid()) {
-                        Holder<EntityStore> holder = playerRef.getHolder();
-                        if (holder != null) {
-                            uuid = holder.ensureAndGetComponent(UUIDComponent.getComponentType()).getUuid();
-                        }
-                    }
+                    UUID uuid = playerRef == null || !playerRef.isValid() ? null : playerRef.getUuid();
                     return context.getQuery().apply(uuid, params).result;
                 }
 
