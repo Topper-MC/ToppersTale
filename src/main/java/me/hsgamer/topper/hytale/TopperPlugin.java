@@ -1,12 +1,9 @@
 package me.hsgamer.topper.hytale;
 
 import com.google.gson.GsonBuilder;
-import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
-import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.hsgamer.hscore.config.gson.GsonConfig;
 import me.hsgamer.hscore.config.proxy.ConfigGenerator;
 import me.hsgamer.topper.hytale.commands.ExampleCommand;
@@ -28,7 +25,7 @@ public class TopperPlugin extends JavaPlugin {
     public TopperPlugin(@Nonnull JavaPluginInit init) {
         super(init);
         this.mainConfig = ConfigGenerator.newInstance(MainConfig.class, new GsonConfig(getDataDirectory().resolve("config.json").toFile(), new GsonBuilder().setPrettyPrinting().create()));
-        this.taskManager = new TaskManager(this);
+        this.taskManager = new TaskManager();
         this.valueProviderManager = new ValueProviderManager(this);
         this.topTemplate = new HyTopTemplate(this);
         this.hookManager = new HookManager(this);
@@ -41,10 +38,7 @@ public class TopperPlugin extends JavaPlugin {
         topTemplate.enable();
         hookManager.call(HookManager.Hook::start);
         getCommandRegistry().registerCommand(new ExampleCommand("message", "Message Command"));
-//        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, event -> {
-//            Ref<EntityStore> playerRef = event.getPlayerRef();
-//            topTemplate.getTopManager().create(playerRef.getStore().ensureAndGetComponent(playerRef, UUIDComponent.getComponentType()).getUuid());
-//        });
+        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, topTemplate::onPlayerReady);
     }
 
     @Override
