@@ -125,7 +125,7 @@
             <plugin>
                 <groupId>io.github.projectunified</groupId>
                 <artifactId>hytale-run-maven-plugin</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.1</version>
                 <configuration>
                     <artifactFile>${project.build.directory}/${project.build.finalName}-shaded.jar</artifactFile>
                 </configuration>
@@ -213,6 +213,7 @@
             <groupId>at.helpch</groupId>
             <artifactId>placeholderapi-hytale</artifactId>
             <version>1.0.4</version>
+            <classifier>hytale</classifier>
             <scope>provided</scope>
         </dependency>
     </dependencies>
